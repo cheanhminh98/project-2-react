@@ -7,6 +7,22 @@
   pointer-events: none;
 }
 
+label, span, input, th, td, button, select{
+  font-size: 15px !important;
+}
+
+td{
+  vertical-align: middle !important;
+}
+
+.fix-dropdown{
+  float: right;
+}
+
+.row.mt-15 {
+    margin-bottom: 1%;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
