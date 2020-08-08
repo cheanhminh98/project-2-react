@@ -13,6 +13,7 @@ class App extends Component{
         super(props);
         this.state = {
             tasks : [],
+            isDisplayForm : false,
         }
     }
 
@@ -51,9 +52,18 @@ class App extends Component{
         }
     }
 
+    onToggleForm(){
+        this.setState({
+            isDisplayForm : !this.state.isDisplayForm,
+        })
+    }
+
+    
+
     render() {
 
-        var {tasks} = this.state; //var tasks = this.state.tasks
+        var {tasks, isDisplayForm} = this.state; //var tasks = this.state.tasks
+        var elmTaskForm = isDisplayForm ? <TaskForm/> : "";
 
         return (
             <div className="container">
@@ -62,12 +72,18 @@ class App extends Component{
                     <hr/>
                 </div>
                 <div className="row">
+                    <div className={isDisplayForm === true ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : ''}>
+                        {elmTaskForm}
+                    </div>
                     
-                    <TaskForm/>
-                    
-                    <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                        <button type="button" className="btn btn-primary" style={{marginBottom: 1 + '%'}}>
-                            <span className="fa fa-plus mr-5"></span>Thêm Công Việc 
+                    <div className={isDisplayForm === true ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
+                        <button 
+                            type="button" 
+                            className={isDisplayForm === true ? 'btn btn-danger' : "btn btn-primary"} 
+                            style={{marginBottom: 1 + '%'}}
+                            onClick = {() => this.onToggleForm()}
+                        >
+                            <span className="fa fa-plus mr-5"></span>{isDisplayForm === true ? 'Quay lại' : "Thêm công việc"} 
                         </button> 
 
                         <button type="button" 
