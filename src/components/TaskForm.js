@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 
 class TaskForm extends Component{
+
 	render(){
 		return(
-			<div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 				<div className="panel panel-warning">
 	                <div className="panel-heading">
-	                    <h3 className="panel-title">Thêm Công Việc</h3>
+	                    <h3 className="panel-title">Thêm Công Việc
+                    		
+
+	                    </h3>
+
 	                </div>
 	                <div className="panel-body">
 	                    <form>
@@ -27,7 +31,7 @@ class TaskForm extends Component{
 	                    </form>
 	                </div>
 	            </div>
-            </div>
+           
 		);
 	}
 }
