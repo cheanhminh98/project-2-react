@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import TaskItem from './Task-Item';
 
 class TaskList extends Component{
-	render(){
-        var {tasks} = this.props; //var tasks = this.props.task
+    render(){
+        var {tasks} = this.props;
         var task = tasks.map((task, index)=>{
             return <TaskItem key={task.id} index={index} task={task}/>
-        });
-		return(
-			<div className="row mt-15">
+        })
+        console.log(task)
+        return(
+            <div className="row mt-15">
                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <table className="table table-bordered table-hover">
                         <thead>
@@ -39,8 +40,8 @@ class TaskList extends Component{
                     </table>
                 </div>
             </div>
-		);
-	}
+        );
+    }
 }
 
 export default TaskList;
