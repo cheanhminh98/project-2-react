@@ -70,8 +70,8 @@ class TaskForm extends Component{
 	                        	value={this.state.status}
 	                        	onChange={this.onChange}
 	                        	>
-	                            <option value={true}>Kích Hoạt</option>
-	                            <option value={false}>Ẩn</option>
+	                            <option value={true}>Đã hoàn thành</option>
+	                            <option value={false}>Đang thực hiện</option>
 	                        </select>
 	                        <br/>
 	                        <div className="text-center">
