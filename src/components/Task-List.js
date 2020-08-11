@@ -5,7 +5,9 @@ class TaskList extends Component{
     render(){
         var {tasks} = this.props;
         var task = tasks.map((task, index)=>{
-            return <TaskItem key={task.id} index={index} task={task} onUpdateStatus={this.props.onUpdateStatus}/>
+            return <TaskItem key={task.id} index={index} task={task} 
+                                onUpdateStatus={this.props.onUpdateStatus}
+                                onDelete={this.props.onDelete}/>
         })
         return(
             <div className="row mt-15">
