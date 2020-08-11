@@ -75,6 +75,30 @@ class App extends Component{
         })
     }
 
+    onUpdateStatus = (id) => {
+        var {tasks} = this.state;
+        var index = this.findIndex(id);
+        console.log(index);
+        if(index !== -1){
+            tasks[index].status = !tasks[index].status;
+            this.setState({
+                tasks : tasks
+            })
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+    }
+
+    findIndex = (id) => {
+        var {tasks} = this.state;
+        var result = -1;
+        tasks.forEach((task, index)=>{
+            if(task.id === id){
+                result = index;
+            }
+        });
+        return result;
+    }
+
     render() {
 
         var {tasks, isDisplayForm} = this.state; //var tasks = this.state.tasks
@@ -111,7 +135,7 @@ class App extends Component{
 
                         <Control/>
                         
-                        <TaskList tasks={tasks}/>
+                        <TaskList tasks={tasks} onUpdateStatus={this.onUpdateStatus}/>
 
                     </div>
                 </div>
