@@ -5,6 +5,7 @@ class TaskForm extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
+			id : '',
 			name : '',
 			status: false
 		}
@@ -40,49 +41,81 @@ class TaskForm extends Component{
 		this.props.onCloseForm();
 	}
 
+	onEdit = () => {
+		this.props.onEdit();
+	}
+
+	componentWillMount(){
+		if(this.props.taskEditing){
+			this.setState({
+				id: this.props.taskEditing.id,
+				name: this.props.taskEditing.name,
+				status: this.props.taskEditing.status,
+			});
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+        // console.log(nextProps);
+        console.log(nextProps.taskEditing);
+        if (nextProps && nextProps.taskEditing) {
+            this.setState({
+                id: nextProps.taskEditing.id,
+                name: nextProps.taskEditing.name,
+                status: nextProps.taskEditing.status,
+            });
+        } else if (!nextProps.taskEditing) {
+            this.setState({
+                id: "",
+                name: "",
+                status: false,
+            });
+        }
+    }
+
 	render(){
-
+		var {id} = this.state;
 		return(
-				<div className="panel panel-warning">
-	                <div className="panel-heading">
-	                    <h3 className="panel-title">Thêm Công Việc
-	                    </h3>
+			<div className="panel panel-warning">
+                <div className="panel-heading">
+                    <h3 className="panel-title">{id === '' ? 'Thêm công việc' : 'Cập nhật công việc'}
+                    </h3>
 
-	                </div>
-	                <div className="panel-body">
-	                    <form onSubmit={this.onSubmit}>
-	                        <div className="form-group">
-	                            <label>Tên :</label>
-	                            <input 
-	                            	type="text" 
-	                            	className="form-control" 
-	                            	name="name"
-	                            	value={this.state.name}
-	                            	onChange={this.onChange}
+                </div>
+                <div className="panel-body">
+                    <form onSubmit={this.onSubmit}>
+                        <div className="form-group">
+                            <label>Tên :</label>
+                            <input 
+                            	type="text" 
+                            	className="form-control" 
+                            	name="name"
+                            	value={this.state.name}
+                            	onChange={this.onChange}
 
-	                            />
-	                        </div>
-	                        <label>Trạng Thái :</label>
-	                        <select 
-	                        	className="form-control" 
-	                        	required="required"
-	                        	name="status"
-	                        	value={this.state.status}
-	                        	onChange={this.onChange}
-	                        	>
-	                            <option value={true}>Đã hoàn thành</option>
-	                            <option value={false}>Đang thực hiện</option>
-	                        </select>
-	                        <br/>
-	                        <div className="text-center">
-	                            <button type="submit" className="btn btn-warning">Thêm</button>&nbsp;
-	                            <button type="button" className="btn btn-danger" onClick={this.onClear}>Hủy Bỏ</button>
-	                        </div>
-	                    </form>
-	                </div>
-	            </div>
+                            />
+                        </div>
+                        <label>Trạng Thái :</label>
+                        <select 
+                        	className="form-control" 
+                        	required="required"
+                        	name="status"
+                        	value={this.state.status}
+                        	onChange={this.onChange}
+                        	>
+                            <option value={true}>Đã hoàn thành</option>
+                            <option value={false}>Đang thực hiện</option>
+                        </select>
+                        <br/>
+                        <div className="text-center">
+                            <button type="submit" className="btn btn-warning">Thêm</button>&nbsp;
+                            <button type="button" className="btn btn-danger" onClick={this.onClear}>Hủy Bỏ</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
            
-		);
+		);	
 	}
 }
 
