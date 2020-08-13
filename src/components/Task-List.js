@@ -2,8 +2,31 @@ import React, {Component} from 'react';
 import TaskItem from './Task-Item';
 
 class TaskList extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            filterName : '',
+            filterStatus: -1,
+        }
+    }
+
+    onChange = (event) => {
+        var target = event.target;
+        var name = target.name;
+        var value = target.value;
+        this.props.onChangeFindName(
+            name === 'filterName' ? value : this.state.filterName,
+            name === 'filterStatus' ? value : this.state.filterStatus
+        );
+        this.setState({
+            [name] : value,
+        })
+    }
+
     render(){
         var {tasks} = this.props;
+        var {filterName, filterStatus} = this.state;
         var task = tasks.map((task, index)=>{
             return <TaskItem key={task.id} index={index} task={task} 
                                 onUpdateStatus={this.props.onUpdateStatus}
@@ -26,13 +49,13 @@ class TaskList extends Component{
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input type="text" className="form-control" />
+                                    <input type="text" className="form-control" name="filterName" onChange={this.onChange} value={filterName}/>
                                 </td>
                                 <td>
-                                    <select className="form-control">
-                                        <option value="-1">Tất Cả</option>
-                                        <option value="0">Đang thực hiện</option>
-                                        <option value="1">Đã hoàn thành</option>
+                                    <select className="form-control" name="filterStatus" onChange={this.onChange} value={filterStatus}>
+                                        <option value={-1}>Tất Cả</option>
+                                        <option value={0}>Đang thực hiện</option>
+                                        <option value={1}>Đã hoàn thành</option>
                                     </select>
                                 </td>
                                 <td></td>
